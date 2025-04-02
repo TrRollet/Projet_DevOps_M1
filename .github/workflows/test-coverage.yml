@@ -25,7 +25,7 @@ jobs:
       - name: Update Coverage Badge
         env:
           GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
-          GIST_ID: f5171bd8c8f307c0c504982ccf574a0d
+          GIST_ID: ac9b3459fd4861224847a25640876620
         run: |
           cd projet_devops
           COVERAGE=$(awk -F"," '{ instructions += $4 + $5; covered += $5 } END { print covered/instructions*100 }' target/site/jacoco/jacoco.csv)
