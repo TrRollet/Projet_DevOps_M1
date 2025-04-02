@@ -112,7 +112,7 @@ public class DataFrame {
 			while ((line = br.readLine()) != null && !line.trim().isEmpty()) {
 				allData.add(line.split(","));
 			}
-	
+		
 			for (int col = 0; col < headers.length; col++) {
 				String header = headers[col].trim();
 				boolean allInteger = true;
@@ -166,7 +166,7 @@ public class DataFrame {
 		}
 		return df;
 	}
-	
+		
 	/**
 	 * Vérifie si une chaîne de caractères peut être convertie en entier
 	 * 
@@ -181,7 +181,7 @@ public class DataFrame {
 			return false;
 		}
 	}
-	
+		
 	/**
 	 * Vérifie si une chaîne de caractères peut être convertie en double
 	 * 
