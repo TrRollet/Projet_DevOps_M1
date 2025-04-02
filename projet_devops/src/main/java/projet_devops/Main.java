@@ -5,6 +5,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) {
         try {
+            // MAIN TEMPORAIRE
             if (args.length < 1) {
                 System.err.println("Erreur: Veuillez spécifier le chemin du fichier CSV");
                 System.exit(1);
