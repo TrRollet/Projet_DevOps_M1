@@ -2,7 +2,7 @@ name: Tests & Coverage
 
 on:
   push:
-    branches: [ main, dataframe ]
+    branches: [ main ]
 
 jobs:
   test:
