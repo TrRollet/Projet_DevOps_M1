@@ -8,10 +8,22 @@ import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+/**
+ * Classe de test pour la classe DataFrame
+ */
 public class DataFrameTest {
+    /**
+     * DataFrame à tester
+     */
     private DataFrame df;
+    /**
+     * Fichier temporaire pour les tests
+     */
     private Path tempFile;
 
+    /**
+     * Méthode exécutée avant chaque test pour initialiser le DataFrame et le fichier temporaire
+     */
     @Before
     public void setUp() throws IOException {
         df = new DataFrame();
@@ -24,36 +36,54 @@ public class DataFrameTest {
         }
     }
 
+    /**
+     * Test de la création d'un DataFrame
+     */
     @Test
     public void testDataFrameCreation() {
         assertNotNull("Un nouveau DataFrame ne devrait pas être null", df);
         assertEquals("Un nouveau DataFrame devrait avoir 0 colonnes", 0, df.getColumnCount());
     }
 
+    /**
+     * Test du nombre de lignes dans le DataFrame
+     */
     @Test
     public void testCSVRowCount() throws IOException {
         DataFrame dfFromCsv = DataFrame.fromCSV(tempFile.toString());
         assertEquals("Le DataFrame devrait contenir 3 lignes", 3, dfFromCsv.getRowCount());
     }
 
+    /**
+     * Test du nombre de colonnes dans le DataFrame
+     */
     @Test
     public void testCSVColumnCount() throws IOException {
         DataFrame dfFromCsv = DataFrame.fromCSV(tempFile.toString());
         assertEquals("Le DataFrame devrait contenir 6 colonnes", 6, dfFromCsv.getColumnCount());
     }
 
+    /**
+     * Test du type de la colonne String
+     */
     @Test
     public void testStringColumnType() throws IOException {
         DataFrame dfFromCsv = DataFrame.fromCSV(tempFile.toString());
         assertEquals("La colonne 'nom' devrait être de type String", String.class, dfFromCsv.getColumn("nom").getDataType());
     }
 
+    /**
+     * Test du type de la colonne numérique
+     */
     @Test
     public void testNumericColumnType() throws IOException {
         DataFrame dfFromCsv = DataFrame.fromCSV(tempFile.toString());
         assertEquals("La colonne 'age' devrait être de type Integer", Integer.class, dfFromCsv.getColumn("age").getDataType());
     }
 
+    /**
+     * Test du type 
+     */
     @Test
     public void testStringColumnValue() throws IOException {
         DataFrame dfFromCsv = DataFrame.fromCSV(tempFile.toString());
