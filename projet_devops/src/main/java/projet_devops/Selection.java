@@ -6,7 +6,7 @@ public class Selection {
     
     @SuppressWarnings("unchecked")
 
-    public <T> DataFrame selectIndex(DataFrame df, int start, int end) {
+    public <T> DataFrame selectLines(DataFrame df, int start, int end) {
         DataFrame newDf = new DataFrame();
 
         for (String columnName : df.getColumnNames()) {
@@ -28,7 +28,7 @@ public class Selection {
 
     @SuppressWarnings("unchecked")
 
-    public <T> DataFrame selectColumn(DataFrame df, ArrayList<String> columns) {
+    public <T> DataFrame selectColumns(DataFrame df, ArrayList<String> columns) {
         DataFrame newDf = new DataFrame();
 
         for (int i = 0; i < columns.size(); i++) {
