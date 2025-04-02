@@ -35,9 +35,13 @@ jobs:
           elif (( $(echo "$COVERAGE > 60" | bc -l) )); then
             COLOR="yellow"
           fi
-          JSON="{\"schemaVersion\": 1,\"label\": \"coverage\",\"message\": \"${COVERAGE}%\",\"color\": \"${COLOR}\"}"
+          JSON=$(jq -n \
+            --arg msg "$COVERAGE%" \
+            --arg color "$COLOR" \
+            '{"schemaVersion": 1, "label": "coverage", "message": $msg, "color": $color}')
+          
           curl -X PATCH \
             -H "Authorization: token ${GIST_TOKEN}" \
             -H "Content-Type: application/json" \
-            -d "{\"files\": {\"coverage.json\": {\"content\": ${JSON}}}}" \
+            -d "{\"files\": {\"coverage.json\": {\"content\": $(echo "$JSON" | jq -R -s .)}}" \
             "https://api.github.com/gists/${GIST_ID}"
