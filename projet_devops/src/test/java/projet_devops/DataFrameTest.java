@@ -85,10 +85,10 @@ public class DataFrameTest {
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
-	public void testGetColumnByTooLargeIndex() throws IOException {
-		DataFrame dfFromCsv = DataFrame.fromCSV(tempFile.toString());
-		dfFromCsv.getColumn(10); // Devrait lever une exception
-	}
+    public void testGetColumnByTooLargeIndex() throws IOException {
+        DataFrame dfFromCsv = DataFrame.fromCSV(tempFile.toString());
+        dfFromCsv.getColumn(10); // Devrait lever une exception
+    }
 
     @Test
     public void testGetColumnNames() throws IOException {
@@ -121,60 +121,60 @@ public class DataFrameTest {
         assertNull("Une valeur vide devrait être lue comme null", dfFromCsv.getColumn("nom").get(1));
     }
 
-	@Test
-	public void testIncompleteRowInCSV() throws IOException {
-		// CSV avec une ligne incomplète (moins de colonnes)
-		try (FileWriter writer = new FileWriter(tempFile.toFile())) {
-			writer.write("nom,prenom,age\n");
-			writer.write("NomA,PrenomA\n");          // Ligne incomplète
-			writer.write("NomB,PrenomB,30\n");
-		}
-		
-		DataFrame dfFromCsv = DataFrame.fromCSV(tempFile.toString());
-		assertNull("Une colonne manquante devrait être lue comme null", 
-			dfFromCsv.getColumn("age").get(0));
-	}
+    @Test
+    public void testIncompleteRowInCSV() throws IOException {
+        // CSV avec une ligne incomplète (moins de colonnes)
+        try (FileWriter writer = new FileWriter(tempFile.toFile())) {
+            writer.write("nom,prenom,age\n");
+            writer.write("NomA,PrenomA\n");          // Ligne incomplète
+            writer.write("NomB,PrenomB,30\n");
+        }
+        
+        DataFrame dfFromCsv = DataFrame.fromCSV(tempFile.toString());
+        assertNull("Une colonne manquante devrait être lue comme null", 
+            dfFromCsv.getColumn("age").get(0));
+    }
 
-	@Test
-	public void testEmptyFieldInCSV() throws IOException {
-		// CSV avec des champs vides au milieu
-		try (FileWriter writer = new FileWriter(tempFile.toFile())) {
-			writer.write("nom,prenom,age\n");
-			writer.write("NomA,,25\n");              // Champ vide au milieu
-			writer.write("NomB,PrenomB,30\n");
-		}
-		
-		DataFrame dfFromCsv = DataFrame.fromCSV(tempFile.toString());
-		assertNull("Un champ vide devrait être lu comme null", 
-			dfFromCsv.getColumn("prenom").get(0));
-	}
+    @Test
+    public void testEmptyFieldInCSV() throws IOException {
+        // CSV avec des champs vides au milieu
+        try (FileWriter writer = new FileWriter(tempFile.toFile())) {
+            writer.write("nom,prenom,age\n");
+            writer.write("NomA,,25\n");              // Champ vide au milieu
+            writer.write("NomB,PrenomB,30\n");
+        }
+        
+        DataFrame dfFromCsv = DataFrame.fromCSV(tempFile.toString());
+        assertNull("Un champ vide devrait être lu comme null", 
+            dfFromCsv.getColumn("prenom").get(0));
+    }
 
-	@Test
-	public void testMixedValuesInNumericColumn() throws IOException {
-		// CSV avec des valeurs mixtes (nombres et texte)
-		try (FileWriter writer = new FileWriter(tempFile.toFile())) {
-			writer.write("valeur\n");
-			writer.write("10.20\n");
-			writer.write("vingt\n");    // texte dans une colonne numérique
-		}
-		
-		DataFrame dfFromCsv = DataFrame.fromCSV(tempFile.toString());
-		assertEquals("Une colonne avec texte et nombres devrait être de type String",String.class, dfFromCsv.getColumn("valeur").getDataType());
-	}
+    @Test
+    public void testMixedValuesInNumericColumn() throws IOException {
+        // CSV avec des valeurs mixtes (nombres et texte)
+        try (FileWriter writer = new FileWriter(tempFile.toFile())) {
+            writer.write("valeur\n");
+            writer.write("10.20\n");
+            writer.write("vingt\n");    // texte dans une colonne numérique
+        }
+        
+        DataFrame dfFromCsv = DataFrame.fromCSV(tempFile.toString());
+        assertEquals("Une colonne avec texte et nombres devrait être de type String",String.class, dfFromCsv.getColumn("valeur").getDataType());
+    }
 
-	@Test
-	public void testAddNullDoubleValue() throws IOException {
-		// CSV avec des valeurs doubles et des lignes vides
-		try (FileWriter writer = new FileWriter(tempFile.toFile())) {
-			writer.write("nom,valeur\n");
-			writer.write("NomA,10.20\n");
-			writer.write("NomB,\n");          // Ligne vide
-			writer.write("NomC,20.30\n");
-		}
+    @Test
+    public void testAddNullDoubleValue() throws IOException {
+        // CSV avec des valeurs doubles et des lignes vides
+        try (FileWriter writer = new FileWriter(tempFile.toFile())) {
+            writer.write("nom,valeur\n");
+            writer.write("NomA,10.20\n");
+            writer.write("NomB,\n");          // Ligne vide
+            writer.write("NomC,20.30\n");
+        }
 
-		DataFrame dfFromCsv = DataFrame.fromCSV(tempFile.toString());
-		assertEquals("La première valeur devrait être 10.20", Double.valueOf(10.20), dfFromCsv.getColumn("valeur").get(0));
-		assertNull("La deuxième valeur devrait être null", dfFromCsv.getColumn("valeur").get(1));
-		assertEquals("La troisième valeur devrait être 20.30", Double.valueOf(20.30), dfFromCsv.getColumn("valeur").get(2));
-	}
+        DataFrame dfFromCsv = DataFrame.fromCSV(tempFile.toString());
+        assertEquals("La première valeur devrait être 10.20", Double.valueOf(10.20), dfFromCsv.getColumn("valeur").get(0));
+        assertNull("La deuxième valeur devrait être null", dfFromCsv.getColumn("valeur").get(1));
+        assertEquals("La troisième valeur devrait être 20.30", Double.valueOf(20.30), dfFromCsv.getColumn("valeur").get(2));
+    }
 }
