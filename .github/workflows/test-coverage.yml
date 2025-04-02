@@ -1,0 +1,43 @@
+name: Tests & Coverage
+
+on:
+  push:
+    branches: [ main, dataframe ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          
+      - name: Run Tests & Generate Coverage
+        run: |
+          cd projet_devops
+          mvn clean test
+          mvn jacoco:prepare-agent test jacoco:report
+          
+      - name: Update Coverage Badge
+        env:
+          GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
+          GIST_ID: f5171bd8c8f307c0c504982ccf574a0d
+        run: |
+          cd projet_devops
+          COVERAGE=$(awk -F"," '{ instructions += $4 + $5; covered += $5 } END { print covered/instructions*100 }' target/site/jacoco/jacoco.csv)
+          COLOR="red"
+          if (( $(echo "$COVERAGE > 80" | bc -l) )); then
+            COLOR="green"
+          elif (( $(echo "$COVERAGE > 60" | bc -l) )); then
+            COLOR="yellow"
+          fi
+          JSON="{\"schemaVersion\": 1,\"label\": \"coverage\",\"message\": \"${COVERAGE}%\",\"color\": \"${COLOR}\"}"
+          curl -X PATCH \
+            -H "Authorization: token ${GIST_TOKEN}" \
+            -H "Content-Type: application/json" \
+            -d "{\"files\": {\"coverage.json\": {\"content\": ${JSON}}}}" \
+            "https://api.github.com/gists/${GIST_ID}"
