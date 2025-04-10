@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/DECORATION/1.8.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 http://maven.apache.org/xsd/decoration-1.8.0.xsd"
+         name="DataFrame">
+
+    <bannerLeft>
+        <name>DataFrame</name>
+    </bannerLeft>
+
+    <publishDate position="right"/>
+    <version position="right"/>
+
+    <body>
+        <menu name="Documentation">
+            <item name="Accueil" href="index.html"/>
+            <item name="JavaDoc" href="apidocs/index.html"/>
+            <item name="GitHub" href="https://github.com/TrRollet/Projet_DevOps_M1"/>
+        </menu>
+        
+        <menu ref="reports"/>
+    </body>
+</project>
+
