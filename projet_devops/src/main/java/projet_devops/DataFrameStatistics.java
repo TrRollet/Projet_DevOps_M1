@@ -3,6 +3,10 @@ package projet_devops;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
+
 
 public class DataFrameStatistics {
     
@@ -157,7 +161,18 @@ public class DataFrameStatistics {
         System.out.println();
     }
 
+    /**
+     * Formate une valeur numérique pour l'affichage (ex: 2.00)
+     * 
+     * @param value La valeur à formater
+     * @return La valeur formatée sous forme de chaîne
+     */
     String formatValue(Double value) {
-        return value != null ? String.format("%.2f", value) : "N/A";
+        if (value == null) {
+            return "N/A";
+        }
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US); // Pour avoir un . à la place de la virgule, sinon cela met , si on est en France
+        DecimalFormat df = new DecimalFormat("0.00", symbols);
+        return df.format(value);
     }
 }
