@@ -12,7 +12,13 @@ import java.util.Map;
  * Classe représantant un DataFrame
  */
 public class DataFrame {
+	/**
+	 * Map contenant les colonnes du DataFrame
+	 */
     private Map<String, DataColumn<?>> columns;
+	/**
+	 * Nombre de lignes du DataFrame
+	 */
     private int rowCount;
 
 	/**

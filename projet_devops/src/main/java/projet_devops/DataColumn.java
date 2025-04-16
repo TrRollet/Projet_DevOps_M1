@@ -5,10 +5,21 @@ import java.util.List;
 
 /**
  * Classe représentant une colonne dans un DataFrame
+ * 
+ * @param <T> Le type de données de la colonne
  */
 public class DataColumn<T> {
+    /**
+     * Nom de la colonne
+     */
     private String columnName;
+    /**
+     * Liste des valeurs de la colonne
+     */
     private List<T> values;
+    /**
+     * Type de données de la colonne
+     */
     private Class<T> dataType;
     
     /**
