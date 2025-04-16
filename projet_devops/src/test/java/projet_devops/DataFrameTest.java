@@ -134,8 +134,8 @@ public class DataFrameTest {
         col2.add("value2");
         col2.add("value3");
         
-        df.addColumn("test1", col1);
-        df.addColumn("test2", col2); // Devrait lever une exception car tailles différentes
+        df.addColumn(col1);
+        df.addColumn(col2); // Devrait lever une exception car tailles différentes
     }
 
     @Test

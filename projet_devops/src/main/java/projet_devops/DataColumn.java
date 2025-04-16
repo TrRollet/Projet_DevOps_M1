@@ -35,12 +35,34 @@ public class DataColumn<T> {
     }
 
     /**
+     * Constructeur de la classe DataColumn avec une liste de valeurs
+     * 
+     * @param columnName Le nom de la colonne
+     * @param dataType   Le type de données de la colonne
+     * @param values     La liste des valeurs de la colonne
+     */
+    public DataColumn(String columnName, Class<T> dataType, List<T> values) {
+        this.columnName = columnName;
+        this.dataType = dataType;
+        this.values = new ArrayList<>(values);
+    }
+
+    /**
      * Ajoute une valeur à la colonne
      * 
      * @param value La valeur à ajouter
      */
     public void add(T value) {
         values.add(value);
+    }
+
+    /**
+     * Ajoute une liste de valeurs à la colonne
+     * 
+     * @param newValues La liste de valeurs à ajouter
+     */
+    public void addAll(List<T> newValues) {
+        values.addAll(newValues);
     }
 
     /**

@@ -32,17 +32,16 @@ public class DataFrame {
 	/**
 	 * Ajoute une colonne au DataFrame
 	 * 
-	 * @param name   Le nom de la colonne
 	 * @param column La colonne à ajouter
 	 * @throws IllegalArgumentException Si le nombre de lignes de la nouvelle colonne ne correspond pas au nombre de lignes existant
 	 */
-    public void addColumn(String name, DataColumn<?> column) {
+    public void addColumn(DataColumn<?> column) {
         if (columns.isEmpty()) {
             rowCount = column.size();
         } else if (column.size() != rowCount) {
             throw new IllegalArgumentException("La nouvelle colonne doit avoir le même nombre de lignes");
         }
-        columns.put(name, column);
+        columns.put(column.getColumnName(), column);
     }
 
 	/**
@@ -167,7 +166,7 @@ public class DataFrame {
 			
 			//========= Ajout des colonnes au DataFrame =========
 			for (String header : headers) {
-				df.addColumn(header.trim(), tempColumns.get(header.trim()));
+				df.addColumn(tempColumns.get(header.trim()));
 			}
 		}
 		return df;
