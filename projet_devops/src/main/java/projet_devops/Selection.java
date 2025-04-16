@@ -29,7 +29,6 @@ public class Selection {
             throw new IllegalArgumentException("Le DataFrame est vide");
         }
 
-
         for (String columnName : df.getColumnNames()) {
 
             DataColumn<T> originalColumn = (DataColumn<T>) df.getColumn(columnName);
@@ -56,7 +55,6 @@ public class Selection {
      * @return Un nouveau DataFrame contenant uniquement les colonnes sélectionnées
      * @throws IllegalArgumentException si la liste des colonnes est vide ou si une colonne n'existe pas
      */
-
     public <T> DataFrame selectColumns(DataFrame df, ArrayList<String> columns) {
         DataFrame newDf = new DataFrame();
 
@@ -77,7 +75,7 @@ public class Selection {
         }
 
         return newDf;
-    }  
+    }
 
     /**
      * Évalue une expression mathématique sur les colonnes numériques

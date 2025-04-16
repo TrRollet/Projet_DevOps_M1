@@ -38,6 +38,7 @@ public class Affichage {
             System.out.print(" ");
         }
         System.out.println();
+      
         int max=5;
         if (df.getRowCount() < 5) {
             max = df.getRowCount();
