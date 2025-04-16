@@ -120,4 +120,32 @@ public class DataColumnTest {
         assertEquals("La valeur ajoutée devrait être récupérable", "test", stringColumn.get(0));
         assertEquals("La taille devrait être 1 après ajout", 1, stringColumn.size());
     }
+
+    /**
+     * Test de l'ajout d'une liste de valeurs
+     */
+    @Test
+    public void testAddAll() {
+        List<String> values = List.of("A", "B", "C");
+        stringColumn.addAll(values);
+        
+        assertEquals("La taille devrait être 3 après ajout de 3 valeurs", 3, stringColumn.size());
+        assertEquals("La première valeur devrait être 'A'", "A", stringColumn.get(0));
+        assertEquals("La deuxième valeur devrait être 'B'", "B", stringColumn.get(1));
+        assertEquals("La troisième valeur devrait être 'C'", "C", stringColumn.get(2));
+    }
+
+    /**
+     * Test de l'ajout d'une liste avec le constructeur
+     */
+    @Test
+    public void testConstructorWithList() {
+        List<String> values = List.of("A", "B", "C");
+        DataColumn<String> column = new DataColumn<>("test", String.class, values);
+        
+        assertEquals("La taille devrait être 3 après ajout de 3 valeurs", 3, column.size());
+        assertEquals("La première valeur devrait être 'A'", "A", column.get(0));
+        assertEquals("La deuxième valeur devrait être 'B'", "B", column.get(1));
+        assertEquals("La troisième valeur devrait être 'C'", "C", column.get(2));
+    }
 }

@@ -90,42 +90,63 @@ public class DataFrameTest {
         assertEquals("La première ville devrait être 'Paris'", "Paris", dfFromCsv.getColumn("ville").get(0));
     }
 
+    /**
+     * Test de la valeur d'une colonne numérique
+     */
     @Test
     public void testNumericColumnValue() throws IOException {
         DataFrame dfFromCsv = DataFrame.fromCSV(tempFile.toString());
         assertEquals("Le deuxième âge devrait être 30", Integer.valueOf(30), dfFromCsv.getColumn("age").get(1));
     }
 
+    /**
+     * Récupération d'une colonne par son nom
+     */
     @Test
     public void testGetColumnByName() throws IOException {
         DataFrame dfFromCsv = DataFrame.fromCSV(tempFile.toString());
         assertNotNull("La colonne 'prenom' devrait exister", dfFromCsv.getColumn("prenom"));
     }
 
+    /**
+     * Récupération d'une colonne par son index
+     */
     @Test
     public void testGetColumnByIndex() throws IOException {
         DataFrame dfFromCsv = DataFrame.fromCSV(tempFile.toString());
         assertNotNull("La première colonne ne devrait pas être null", dfFromCsv.getColumn(0));
     }
 
+    /**
+     * Test de la récupération d'une colonne par un index négatif
+     */
     @Test(expected = IndexOutOfBoundsException.class)
     public void testGetColumnByInvalidIndex() throws IOException {
         DataFrame dfFromCsv = DataFrame.fromCSV(tempFile.toString());
         dfFromCsv.getColumn(-1); // Devrait lever une exception
     }
 
+    /**
+     * Test de la récupération d'une colonne par un index trop grand
+     */
     @Test(expected = IndexOutOfBoundsException.class)
     public void testGetColumnByTooLargeIndex() throws IOException {
         DataFrame dfFromCsv = DataFrame.fromCSV(tempFile.toString());
         dfFromCsv.getColumn(10); // Devrait lever une exception
     }
 
+    /**
+     * Test de la récupération des noms des colonnes
+     */
     @Test
     public void testGetColumnNames() throws IOException {
         DataFrame dfFromCsv = DataFrame.fromCSV(tempFile.toString());
         assertTrue("La liste des colonnes devrait contenir 'nom'", dfFromCsv.getColumnNames().contains("nom"));
     }
 
+    /**
+     * Test de l'ajout d'une colonne de taille différente
+     */
     @Test(expected = IllegalArgumentException.class)
     public void testAddColumnWithDifferentSize() {
         DataColumn<String> col1 = new DataColumn<>("test1", String.class);
@@ -138,6 +159,9 @@ public class DataFrameTest {
         df.addColumn(col2); // Devrait lever une exception car tailles différentes
     }
 
+    /**
+     * Test de l'ajout d'une colonne avec des valeurs nulles
+     */
     @Test
     public void testEmptyValueInCSV() throws IOException {
         // CSV avec des valeurs vides
@@ -151,6 +175,9 @@ public class DataFrameTest {
         assertNull("Une valeur vide devrait être lue comme null", dfFromCsv.getColumn("nom").get(1));
     }
 
+    /**
+     * Test de l'ajout d'une colonne avec des données incomplètes
+     */
     @Test
     public void testIncompleteRowInCSV() throws IOException {
         // CSV avec une ligne incomplète (moins de colonnes)
@@ -165,6 +192,9 @@ public class DataFrameTest {
             dfFromCsv.getColumn("age").get(0));
     }
 
+    /**
+     * Test de l'ajout d'une colonne avec des valeurs vides au milieu
+     */
     @Test
     public void testEmptyFieldInCSV() throws IOException {
         // CSV avec des champs vides au milieu
@@ -179,6 +209,9 @@ public class DataFrameTest {
             dfFromCsv.getColumn("prenom").get(0));
     }
 
+    /**
+     * Test de l'ajout d'une colonne avec des valeurs mixtes (nombres et texte)
+     */
     @Test
     public void testMixedValuesInNumericColumn() throws IOException {
         // CSV avec des valeurs mixtes (nombres et texte)
@@ -191,7 +224,10 @@ public class DataFrameTest {
         DataFrame dfFromCsv = DataFrame.fromCSV(tempFile.toString());
         assertEquals("Une colonne avec texte et nombres devrait être de type String",String.class, dfFromCsv.getColumn("valeur").getDataType());
     }
-
+    
+    /**
+     * Test de l'ajout d'une colonne avec des valeurs nulles dans une colonne numérique
+     */
     @Test
     public void testAddNullDoubleValue() throws IOException {
         // CSV avec des valeurs doubles et des lignes vides
