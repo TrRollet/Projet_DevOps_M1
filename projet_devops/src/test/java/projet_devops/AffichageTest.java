@@ -33,8 +33,8 @@ public class AffichageTest {
         col2.add("Eve");
         col2.add("Frank");
         
-        df.addColumn("Age", col1);
-        df.addColumn("Nom", col2);
+        df.addColumn(col1);
+        df.addColumn(col2);
         
         // Capture de la sortie standard
         outputStream = new ByteArrayOutputStream();
@@ -94,7 +94,7 @@ public class AffichageTest {
         DataColumn<Integer> smallCol = new DataColumn<>("Test", Integer.class);
         smallCol.add(1);
         smallCol.add(2);
-        smallDf.addColumn("Test", smallCol);
+        smallDf.addColumn(smallCol);
         
         affichage.afficherFirst(smallDf);
         String output = outputStream.toString();
@@ -108,7 +108,7 @@ public class AffichageTest {
         DataColumn<Integer> smallCol = new DataColumn<>("Test", Integer.class);
         smallCol.add(1);
         smallCol.add(2);
-        smallDf.addColumn("Test", smallCol);
+        smallDf.addColumn(smallCol);
         
         affichage.afficherLast(smallDf);
         String output = outputStream.toString();
@@ -121,7 +121,7 @@ public class AffichageTest {
     public void testAfficherToutEmptyDf() {
         DataFrame emptyDf = new DataFrame();
         DataColumn<Integer> emptyCol = new DataColumn<>("Empty", Integer.class);
-        emptyDf.addColumn("Empty", emptyCol);
+        emptyDf.addColumn(emptyCol);
         
         affichage.afficherTout(emptyDf);
         String output = outputStream.toString();

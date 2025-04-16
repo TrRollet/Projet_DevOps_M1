@@ -35,8 +35,8 @@ public class SelectionTest {
         col2.add("Charlie");
         col2.add("David");
         
-        df.addColumn("Age", col1);
-        df.addColumn("Nom", col2);
+        df.addColumn(col1);
+        df.addColumn(col2);
     }
 
     /**
@@ -202,7 +202,7 @@ public class SelectionTest {
         salaryColumn.add(2000);
         salaryColumn.add(3000);
         salaryColumn.add(4000);
-        df.addColumn("Salary", salaryColumn);
+        df.addColumn(salaryColumn);
 
         DataColumn<?> result = selection.eval(df, "Age + Salary");
         assertEquals(4, result.size());
@@ -262,7 +262,7 @@ public class SelectionTest {
         testColumn.add(null);
         testColumn.add(30);
         testColumn.add(40);
-        df.addColumn("Test", testColumn);
+        df.addColumn(testColumn);
 
         DataColumn<?> result = selection.eval(df, "Test * 2");
         assertEquals(4, result.size());
@@ -352,7 +352,7 @@ public class SelectionTest {
         testColumn.add(null);
         testColumn.add(30);
         testColumn.add(40);
-        df.addColumn("Test", testColumn);
+        df.addColumn(testColumn);
 
         ArrayList<Boolean> mask = selection.createBooleanMask(df, "Test", ">", 20);
         assertEquals(4, mask.size());

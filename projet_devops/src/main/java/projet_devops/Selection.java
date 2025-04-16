@@ -39,7 +39,7 @@ public class Selection {
                 indexColumn.add(value);
             }
 
-            newDf.addColumn(columnName, indexColumn);
+            newDf.addColumn(indexColumn);
         }
 
         return newDf;
@@ -71,7 +71,7 @@ public class Selection {
         for (int i = 0; i < columns.size(); i++) {
                 DataColumn<T> originalColumn = (DataColumn<T>) df.getColumn(columns.get(i));
                 
-                newDf.addColumn(columns.get(i), originalColumn);
+                newDf.addColumn(originalColumn);
         }
 
         return newDf;
@@ -235,7 +235,7 @@ public class Selection {
                 }
             }
             
-            newDf.addColumn(columnName, filteredColumn);
+            newDf.addColumn(filteredColumn);
         }
         return newDf;
     }
